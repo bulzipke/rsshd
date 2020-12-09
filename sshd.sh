@@ -80,6 +80,7 @@ fi
 
 sed -i "s;\#SyslogFacility;SyslogFacility;g" $SDIR/sshd_config
 sed -i "s;\#LogLevel;LogLevel;g" $SDIR/sshd_config
+sed -i "s;authpriv\.\*;auth,authpriv\.\*;g" /etc/rsyslog.conf
 
 ln -s /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 rsyslogd
@@ -91,4 +92,4 @@ chmod 755 $HOME/.ssh
 
 # Absolute path necessary! Pass all remaining arguents to sshd. This enables to
 # override some options through -o, for example.
-/usr/sbin/sshd -f ${SDIR}/sshd_config -D -e "$@"
+/usr/sbin/sshd -f ${SDIR}/sshd_config -D 
