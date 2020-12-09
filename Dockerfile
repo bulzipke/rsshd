@@ -1,7 +1,10 @@
-FROM alpine:3.9
+FROM alpine:latest
 MAINTAINER Emmanuel Frecon <efrecon@gmail.com>
 
-RUN apk --update add openssh
+RUN apk --update add openssh tzdata && \
+  ln -s /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+  apk del tzdata
+
 COPY sshd.sh /usr/local/bin/
 
 # Expose the regular ssh port
