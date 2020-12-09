@@ -1,8 +1,9 @@
 FROM alpine:latest
 MAINTAINER Emmanuel Frecon <efrecon@gmail.com>
 
-RUN apk --update add openssh tzdata && \
-  ln -s /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+RUN apk --update add openssh rsyslog tzdata && \
+  ln -s /usr/share/zoneinfo/Asia/Seoul /etc/localtime && \
+  rsyslogd && \
   apk del tzdata
 
 COPY sshd.sh /usr/local/bin/
